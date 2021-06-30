@@ -1,12 +1,16 @@
 package com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.fivestars.recyclerviewcheckboxaccessibilitysample.databinding.MainFragmentBinding
+import android.view.ViewTreeObserver.OnGlobalLayoutListener as OnGlobalLayoutListener1
+
 
 class MainFragment : Fragment() {
 
@@ -14,11 +18,26 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
+    private var recyclerViewReadyCallback: RecyclerViewReadyCallback? = null
+
     private lateinit var viewModel: MainViewModel
     private val listener: AddressViewHolderListener = object : AddressViewHolderListener {
         var lastSelectedAddress: String? = null
-        override fun onAddressChecked(id: String) {
+        override fun onAddressChecked(id: String, position: Int) {
             lastSelectedAddress = id
+
+            Log.d("darran", "address checked position is: $position")
+
+
+            recyclerViewReadyCallback = object : RecyclerViewReadyCallback {
+                override fun onLayoutReady() {
+                    val viewHolder = binding.addressRecyclerView.findViewHolderForLayoutPosition(position)
+                    Log.d("darran", "adapter position is: $viewHolder")
+                    viewHolder?.itemView?.sendAccessibilityEvent(TYPE_VIEW_FOCUSED)
+                    viewHolder?.itemView?.requestFocus()
+                }
+            }
+
             viewModel.selectAddress(id)
         }
 
@@ -51,7 +70,20 @@ class MainFragment : Fragment() {
 
         viewModel.addresses.observe(viewLifecycleOwner) {
             addressAdapter.submitList(it)
+            binding.addressRecyclerView.viewTreeObserver
+                .addOnGlobalLayoutListener(object : OnGlobalLayoutListener1 {
+                    override fun onGlobalLayout() {
+                        recyclerViewReadyCallback?.onLayoutReady()
+                        binding.addressRecyclerView.viewTreeObserver.removeOnGlobalLayoutListener(
+                            this
+                        )
+                    }
+                })
         }
+    }
+
+    interface RecyclerViewReadyCallback {
+        fun onLayoutReady()
     }
 
 }

@@ -19,7 +19,6 @@ package com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +34,7 @@ class AddressAdapter(private val listener: AddressViewHolderListener) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val plant = getItem(position)
-        (holder as AddressViewHolder).bind(plant)
+        (holder as AddressViewHolder).bind(plant, position)
     }
 
     class AddressViewHolder(
@@ -43,14 +42,15 @@ class AddressAdapter(private val listener: AddressViewHolderListener) :
         private val listener: AddressViewHolderListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(address: Address) {
+        fun bind(address: Address, position: Int) {
             Log.d("darran", "Binding address: $address")
 
             binding.addressCheckBox.isChecked = address.selected
             binding.addressCheckBox.tag = address.id
             binding.addressCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    listener.onAddressChecked(buttonView.tag as String)
+                if (isChecked && !address.selected) {
+                    Log.d("darran", "checkbox for address: $address")
+                    listener.onAddressChecked(buttonView.tag as String, position)
                 }
             }
 
@@ -59,18 +59,6 @@ class AddressAdapter(private val listener: AddressViewHolderListener) :
 
             binding.root.setOnClickListener {
                 binding.addressCheckBox.performClick()
-            }
-
-            if (address.selected && listener.shouldAddressRequestFocus(address.id)) {
-                binding.root.run {
-
-
-                        Log.d("darran", "requesting focus for address: $address")
-
-                        requestFocus()
-                        sendAccessibilityEvent(TYPE_VIEW_FOCUSED)
-
-                }
             }
         }
 
@@ -100,6 +88,6 @@ private class AddressDiffCallback : DiffUtil.ItemCallback<Address>() {
 }
 
 interface AddressViewHolderListener {
-    fun onAddressChecked(id: String)
+    fun onAddressChecked(id: String, position: Int)
     fun shouldAddressRequestFocus(id: String): Boolean
 }

@@ -8,7 +8,9 @@ class MainViewModel : ViewModel() {
     fun selectAddress(id: String) {
         val existingList = _addresses.value
         val updatedList = existingList?.map { it.copy(selected = (it.id == id)) }
-        _addresses.postValue(updatedList)
+        updatedList?.run {
+            _addresses.postValue(this)
+        }
     }
 
     private val testList = listOf(
@@ -18,8 +20,9 @@ class MainViewModel : ViewModel() {
         Address("4", "fourth", false),
     )
 
-    private val _addresses: MutableLiveData<List<Address>> = MutableLiveData<List<Address>>(testList)
-    val addresses:LiveData<List<Address>>
-    get() = _addresses
+    private val _addresses: MutableLiveData<List<Address>> =
+        MutableLiveData<List<Address>>(testList)
+    val addresses: LiveData<List<Address>>
+        get() = _addresses
 
 }
