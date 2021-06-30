@@ -1,13 +1,14 @@
 package com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
     fun selectAddress(id: String) {
-        val existingList = addresses.value
+        val existingList = _addresses.value
         val updatedList = existingList?.map { it.copy(selected = (it.id == id)) }
-        addresses.postValue(updatedList)
+        _addresses.postValue(updatedList)
     }
 
     private val testList = listOf(
@@ -17,5 +18,8 @@ class MainViewModel : ViewModel() {
         Address("4", "fourth", false),
     )
 
-    val addresses: MutableLiveData<List<Address>> = MutableLiveData<List<Address>>(testList)
+    private val _addresses: MutableLiveData<List<Address>> = MutableLiveData<List<Address>>(testList)
+    val addresses:LiveData<List<Address>>
+    get() = _addresses
+
 }

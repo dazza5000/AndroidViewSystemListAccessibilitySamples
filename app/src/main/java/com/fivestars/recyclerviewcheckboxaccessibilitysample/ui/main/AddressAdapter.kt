@@ -26,7 +26,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fivestars.recyclerviewcheckboxaccessibilitysample.databinding.ListItemAddressBinding
 
 
-class AddressAdapter(private val listener: AddressViewHolderListener) : ListAdapter<Address, RecyclerView.ViewHolder>(AddressDiffCallback()) {
+class AddressAdapter(private val listener: AddressViewHolderListener) :
+    ListAdapter<Address, RecyclerView.ViewHolder>(AddressDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AddressViewHolder.from(parent, listener)
@@ -47,8 +48,10 @@ class AddressAdapter(private val listener: AddressViewHolderListener) : ListAdap
 
             binding.addressCheckBox.isChecked = address.selected
             binding.addressCheckBox.tag = address.id
-            binding.addressCheckBox.setOnCheckedChangeListener{ buttonView, isChecked ->
-                listener.onAddressChecked(buttonView.tag as String, isChecked)
+            binding.addressCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    listener.onAddressChecked(buttonView.tag as String)
+                }
             }
 
             binding.addressId.text = address.id
@@ -60,16 +63,22 @@ class AddressAdapter(private val listener: AddressViewHolderListener) : ListAdap
 
             if (address.selected && listener.shouldAddressRequestFocus(address.id)) {
                 binding.root.run {
-                    Log.d("darran", "requesting focus for address: $address")
 
-                    requestFocus()
-                    sendAccessibilityEvent(TYPE_VIEW_FOCUSED)
+
+                        Log.d("darran", "requesting focus for address: $address")
+
+                        requestFocus()
+                        sendAccessibilityEvent(TYPE_VIEW_FOCUSED)
+
                 }
             }
         }
 
         companion object {
-            fun from(parent: ViewGroup, listener: AddressViewHolderListener): RecyclerView.ViewHolder {
+            fun from(
+                parent: ViewGroup,
+                listener: AddressViewHolderListener
+            ): RecyclerView.ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemAddressBinding.inflate(layoutInflater, parent, false)
 
@@ -91,6 +100,6 @@ private class AddressDiffCallback : DiffUtil.ItemCallback<Address>() {
 }
 
 interface AddressViewHolderListener {
-    fun onAddressChecked(id: String, selected: Boolean)
+    fun onAddressChecked(id: String)
     fun shouldAddressRequestFocus(id: String): Boolean
 }

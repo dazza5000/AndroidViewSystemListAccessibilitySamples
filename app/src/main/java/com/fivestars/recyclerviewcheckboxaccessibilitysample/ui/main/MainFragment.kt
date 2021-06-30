@@ -17,7 +17,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private val listener: AddressViewHolderListener = object : AddressViewHolderListener {
         var lastSelectedAddress: String? = null
-        override fun onAddressChecked(id: String, selected: Boolean) {
+        override fun onAddressChecked(id: String) {
             lastSelectedAddress = id
             viewModel.selectAddress(id)
         }
@@ -42,7 +42,8 @@ class MainFragment : Fragment() {
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
         binding.addressRecyclerView.adapter = addressAdapter
-        return binding.root    }
+        return binding.root
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
