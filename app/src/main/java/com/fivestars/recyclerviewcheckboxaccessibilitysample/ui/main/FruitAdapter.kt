@@ -39,7 +39,7 @@ class FruitAdapter(private val listener: AddressViewHolderListener) :
             }
 
             binding.addressId.text = fruit.id
-            binding.addressName.text = fruit.name
+            binding.fruitName.text = fruit.name
 
             binding.root.setOnClickListener {
                 binding.addressCheckBox.performClick()
@@ -47,10 +47,6 @@ class FruitAdapter(private val listener: AddressViewHolderListener) :
 
             if (fruit.selected && listener.shouldAddressRequestFocus(fruit.id)) {
                 binding.root.run {
-
-
-                        Log.d("darran", "requesting focus for address: $fruit")
-
                         requestFocus()
                         sendAccessibilityEvent(TYPE_VIEW_FOCUSED)
 

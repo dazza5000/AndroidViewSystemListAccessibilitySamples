@@ -23,13 +23,13 @@
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
         android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/address_name"
+        app:layout_constraintEnd_toStartOf="@id/fruit_name"
         app:layout_constraintStart_toEndOf="@id/address_check_box"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/address_name"
-        android:layout_width="0dp"
+        android:id="@+id/fruit_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@{plant.name}"
