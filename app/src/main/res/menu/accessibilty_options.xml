@@ -6,4 +6,13 @@
     <item
         android:id="@+id/column"
         android:title="column" />
+    <item
+        android:id="@+id/spannable"
+        android:title="spannable" />
+    <item
+        android:id="@+id/string_list"
+        android:title="text list" />
+    <item
+        android:id="@+id/webview"
+        android:title="webview" />
 </menu>

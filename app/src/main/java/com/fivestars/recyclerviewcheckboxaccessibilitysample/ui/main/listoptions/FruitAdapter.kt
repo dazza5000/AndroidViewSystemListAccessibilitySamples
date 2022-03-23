@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.fivestars.recyclerviewcheckboxaccessibilitysample.databinding.ListItemFruitBinding
+import com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.model.Fruit
 
 
 class FruitAdapter(private val listener: AddressViewHolderListener) :

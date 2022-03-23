@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.listoptions.ColumnFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/address_recycler_view"
+    <TextView
+        android:id="@+id/spannable_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="MainFragment"
+        android:text="Spannable"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

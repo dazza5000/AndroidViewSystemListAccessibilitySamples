@@ -1,4 +1,4 @@
-package com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main
+package com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.listoptions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fivestars.recyclerviewcheckboxaccessibilitysample.databinding.MainFragmentBinding
+import com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.AddressViewHolderListener
+import com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.FruitAdapter
+import com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.MainViewModel
 
 class RowFragment : Fragment() {
 

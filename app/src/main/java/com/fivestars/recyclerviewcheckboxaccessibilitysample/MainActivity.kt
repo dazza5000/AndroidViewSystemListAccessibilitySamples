@@ -5,8 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.ColumnFragment
-import com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.RowFragment
+import com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.listoptions.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +36,24 @@ class MainActivity : AppCompatActivity() {
             R.id.column -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, ColumnFragment.newInstance())
+                    .commitNow()
+                true
+            }
+            R.id.spannable -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SpannableFragment.newInstance())
+                    .commitNow()
+                true
+            }
+            R.id.string_list -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, StringFragment.newInstance())
+                    .commitNow()
+                true
+            }
+            R.id.webview -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, WebViewFragment.newInstance())
                     .commitNow()
                 true
             }

@@ -3,6 +3,7 @@ package com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main.model.Fruit
 
 class MainViewModel : ViewModel() {
     fun selectAddress(id: String) {
