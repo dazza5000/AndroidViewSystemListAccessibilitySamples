@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.fivestars.recyclerviewcheckboxaccessibilitysample.databinding.MainFragmentBinding
 
-class MainFragment : Fragment() {
+class ColumnFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = ColumnFragment()
     }
 
     private lateinit var viewModel: MainViewModel
@@ -31,7 +33,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private val addressAdapter: AddressAdapter = AddressAdapter(listener)
+    private val fruitAdapter: FruitAdapter = FruitAdapter(listener)
 
     private lateinit var binding: MainFragmentBinding
 
@@ -41,7 +43,8 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
-        binding.addressRecyclerView.adapter = addressAdapter
+        binding.addressRecyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.addressRecyclerView.adapter = fruitAdapter
         return binding.root
     }
 
@@ -50,7 +53,7 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.addresses.observe(viewLifecycleOwner) {
-            addressAdapter.submitList(it)
+            fruitAdapter.submitList(it)
         }
     }
 

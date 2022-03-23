@@ -6,20 +6,19 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
     fun selectAddress(id: String) {
-        val existingList = _addresses.value
-        val updatedList = existingList?.map { it.copy(selected = (it.id == id)) }
+        val updatedList = _addresses.value!!.map { it.copy(selected = (it.id == id)) }
         _addresses.postValue(updatedList)
     }
 
     private val testList = listOf(
-        Address("1", "first", true),
-        Address("2", "second", false),
-        Address("3", "third", false),
-        Address("4", "fourth", false),
+        Fruit("1", "apple", true),
+        Fruit("2", "orange", false),
+        Fruit("3", "banana", false),
+        Fruit("4", "grape", false),
     )
 
-    private val _addresses: MutableLiveData<List<Address>> = MutableLiveData<List<Address>>(testList)
-    val addresses:LiveData<List<Address>>
+    private val _addresses: MutableLiveData<List<Fruit>> = MutableLiveData<List<Fruit>>(testList)
+    val addresses:LiveData<List<Fruit>>
     get() = _addresses
 
 }

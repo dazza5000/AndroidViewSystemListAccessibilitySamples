@@ -1,19 +1,3 @@
-/*
- * Copyright 2018 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.fivestars.recyclerviewcheckboxaccessibilitysample.ui.main
 
 import android.util.Log
@@ -26,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fivestars.recyclerviewcheckboxaccessibilitysample.databinding.ListItemAddressBinding
 
 
-class AddressAdapter(private val listener: AddressViewHolderListener) :
-    ListAdapter<Address, RecyclerView.ViewHolder>(AddressDiffCallback()) {
+class FruitAdapter(private val listener: AddressViewHolderListener) :
+    ListAdapter<Fruit, RecyclerView.ViewHolder>(AddressDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AddressViewHolder.from(parent, listener)
@@ -43,29 +27,29 @@ class AddressAdapter(private val listener: AddressViewHolderListener) :
         private val listener: AddressViewHolderListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(address: Address) {
-            Log.d("darran", "Binding address: $address")
+        fun bind(fruit: Fruit) {
+            Log.d("darran", "Binding address: $fruit")
 
-            binding.addressCheckBox.isChecked = address.selected
-            binding.addressCheckBox.tag = address.id
+            binding.addressCheckBox.isChecked = fruit.selected
+            binding.addressCheckBox.tag = fruit.id
             binding.addressCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     listener.onAddressChecked(buttonView.tag as String)
                 }
             }
 
-            binding.addressId.text = address.id
-            binding.addressName.text = address.name
+            binding.addressId.text = fruit.id
+            binding.addressName.text = fruit.name
 
             binding.root.setOnClickListener {
                 binding.addressCheckBox.performClick()
             }
 
-            if (address.selected && listener.shouldAddressRequestFocus(address.id)) {
+            if (fruit.selected && listener.shouldAddressRequestFocus(fruit.id)) {
                 binding.root.run {
 
 
-                        Log.d("darran", "requesting focus for address: $address")
+                        Log.d("darran", "requesting focus for address: $fruit")
 
                         requestFocus()
                         sendAccessibilityEvent(TYPE_VIEW_FOCUSED)
@@ -88,13 +72,13 @@ class AddressAdapter(private val listener: AddressViewHolderListener) :
     }
 }
 
-private class AddressDiffCallback : DiffUtil.ItemCallback<Address>() {
+private class AddressDiffCallback : DiffUtil.ItemCallback<Fruit>() {
 
-    override fun areItemsTheSame(oldItem: Address, newItem: Address): Boolean {
+    override fun areItemsTheSame(oldItem: Fruit, newItem: Fruit): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Address, newItem: Address): Boolean {
+    override fun areContentsTheSame(oldItem: Fruit, newItem: Fruit): Boolean {
         return oldItem == newItem
     }
 }
