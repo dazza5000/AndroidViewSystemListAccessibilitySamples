@@ -7,7 +7,7 @@ import android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.fivestars.recyclerviewcheckboxaccessibilitysample.databinding.ListItemAddressBinding
+import com.fivestars.recyclerviewcheckboxaccessibilitysample.databinding.ListItemFruitBinding
 
 
 class FruitAdapter(private val listener: AddressViewHolderListener) :
@@ -23,7 +23,7 @@ class FruitAdapter(private val listener: AddressViewHolderListener) :
     }
 
     class AddressViewHolder(
-        private val binding: ListItemAddressBinding,
+        private val binding: ListItemFruitBinding,
         private val listener: AddressViewHolderListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -64,7 +64,7 @@ class FruitAdapter(private val listener: AddressViewHolderListener) :
                 listener: AddressViewHolderListener
             ): RecyclerView.ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemAddressBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemFruitBinding.inflate(layoutInflater, parent, false)
 
                 return AddressViewHolder(binding, listener)
             }
