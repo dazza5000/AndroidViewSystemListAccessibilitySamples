@@ -32,12 +32,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@{plant.name}"
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintStart_toEndOf="@id/address_id"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Tomato" />
+
+    <TextView
+        android:id="@+id/fruit_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textAppearance="?attr/textAppearanceListItemSecondary"
+        app:layout_constraintStart_toEndOf="@id/address_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fruit_name"
+        tools:text="Tomato" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

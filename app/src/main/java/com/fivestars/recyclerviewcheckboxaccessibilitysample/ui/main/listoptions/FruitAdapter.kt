@@ -41,6 +41,7 @@ class FruitAdapter(private val listener: AddressViewHolderListener) :
 
             binding.addressId.text = fruit.id
             binding.fruitName.text = fruit.name
+            binding.fruitDescription.text = "${fruit.name}ish"
 
             binding.root.setOnClickListener {
                 binding.addressCheckBox.performClick()
