@@ -15,4 +15,10 @@
     <item
         android:id="@+id/webview"
         android:title="webview" />
+    <item
+        android:id="@+id/new_activity"
+        android:title="new activity" />
+    <item
+        android:id="@+id/clickable_view"
+        android:title="clickable view" />
 </menu>

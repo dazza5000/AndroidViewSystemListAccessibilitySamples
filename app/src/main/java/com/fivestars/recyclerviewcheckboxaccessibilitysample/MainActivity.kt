@@ -1,5 +1,6 @@
 package com.fivestars.recyclerviewcheckboxaccessibilitysample
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -17,6 +18,9 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, ColumnFragment.newInstance())
                 .commitNow()
         }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,6 +58,17 @@ class MainActivity : AppCompatActivity() {
             R.id.webview -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, WebViewFragment.newInstance())
+                    .commitNow()
+                true
+            }
+            R.id.new_activity -> {
+                val newIntent = Intent(this, MainActivity::class.java)
+                startActivity(newIntent)
+                true
+            }
+            R.id.clickable_view -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, ClickableViewFragment.newInstance())
                     .commitNow()
                 true
             }
